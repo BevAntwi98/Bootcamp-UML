@@ -1,0 +1,110 @@
+@startuml
+
+title Deliveroo - Class Diagram
+
+
+class Deliveroo {
+..Properties..
+  -noOfRestaurants: Integer
+..Methods..
+  +void appIsRunning()
+}
+
+class Customer{
+..Properties..
+-name: String
+-address: String
+-customer_Id: Integer
+-telephone: Integer
+-email:String
+..Encrypted..
+#profilePassword:String
+..Methods..
++OrderFood()
++CancelOrder()
++MakePayment()
++SubmitFeedback()
+
+
+}
+
+class Order{
+..Properties..
++order_number: Integer
+-customer_id: Integer
++restaurant_name:String
++orderDate: Date
+..Methods..
++hasBeenApproved()
++hasBeenDelivered()
++hasBeenCancelled()
+
+
+}
+
+class Customer_Bot{
+..Properties..
+Bot_name: String
+Bot_number: Integer
+..Methods..
++isActive()
++checkForDiscounts()
++checkForDeals()
+
+}
+
+abstract Bank{
+..Properties..
++bankName: String
+..Methods..
++verifyCardDetails()
++verifyAvailableFunds()
+}
+
+class Restaurant{
+..Properties..
++name:String
+-address:String
++menu:String
+
+..Methods..
++approveOrder()
++assignOrderToChefs()
++assignOrderToDriver()
+}
+
+class Checkout{
+..Methods..
++checkBagIsEmpty()
++editBasketItems()
++askDeliveryAddress()
++payNowButton()
+}
+
+class BankAccount{
+..Properties..
+name:String
+age:Integer
+id: Integer
+}
+
+Customer "1" *-- "many" Order : orders to one 
+Customer_Bot "1" *-- "many" Customer
+Bank "1" *-- "one" Customer : payment method from one
+Deliveroo "1" *-- "many" Customer: one app to 
+Restaurant "many" *-- "many" Customer: delivers food
+Restaurant "many" *-- "many" Order: incoming orders
+
+
+Deliveroo -- Customers
+Deliveroo-- Customer_Bot
+Deliveroo ..> Bank
+Restaurant -- Deliveroo
+Restaurant -- Customers
+Customer_Bot ..> Customers
+Bank -- Checkout
+Bank <|--CustomerBankAccount
+
+
+
+@enduml
