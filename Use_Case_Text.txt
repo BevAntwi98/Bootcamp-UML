@@ -1,0 +1,38 @@
+@startuml
+skinparam actorStyle awesome
+
+
+title  Deliveroo Use Case Diagram
+
+actor Hungry_Person as user
+actor Customer_Help_Bot
+actor Bank
+actor Restaurant_Chef
+
+rectangle System {
+usecase "Launch App" as UC1
+usecase  "Scroll through cuisine" as UC2 
+usecase "Select restaurant to order from" as UC3
+usecase  "Add food items into checkout" as UC4 
+usecase  "Add in card details" as UC5 
+usecase  "Select Pay Now" as UC6 
+
+
+Bank --> (Verify details)
+Bank --> (Check customer has enough money)
+
+Customer_Help_Bot --> (Check if customer has any couchers/discounts avaiable)
+
+Restaurant_Chef --> (make food)
+Restaurant_Chef -->(recive notification that an order has been placed)
+Bank --> (alert restaurant that payment has been made)
+
+}
+user --> UC1
+user --> UC2
+user --> UC3
+user --> UC4
+user --> UC5
+user --> UC6
+
+@enduml
