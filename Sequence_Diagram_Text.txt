@@ -1,0 +1,16 @@
+@startuml
+
+title "Deliveroo Sequence Diagram
+
+actor Customer
+
+
+Customer ->App_UI : user enters postcode
+Customer ->App_UI : Click "Search" or press "Enter" button
+App_UI -> App_API :Use API to locate all restaurants within a certain radius of postcode
+App_API -> Database :  Send request to  collect restaurant data and saves postocde entry
+Database -> App_API:confirms request and gathers restaurant information
+App_API -> App_UI:Loads page with results
+App_UI -> Customer: View list of restaurants
+
+@enduml
